@@ -315,6 +315,7 @@ RODAPÉ E INFORMAÇÕES
 ============================== */
 footer {
   margin-top:36px;
+  margin-bottom: 60px;
   padding:28px;
   border-top:1px solid rgba(255,255,255,0.05);
   background:rgba(11,18,32,0.6);
@@ -326,6 +327,12 @@ footer {
   justify-content:space-between;
   gap:18px;
   flex-wrap:wrap;
+}
+
+.footer-grid .socials {
+  display: flex;
+  gap: 12px;
+  margin-right: 10px; 
 }
 
 .footer-info {
@@ -359,6 +366,10 @@ footer {
   color:var(--muted);
 }
 
+button.qa-btn{
+  margin-top: 13px;
+}
+
 /* ==============================
       ANIMAÇÕES E MODAL PIX
 ============================== */
@@ -367,9 +378,11 @@ from{opacity:0;transform:translateY(20px)}
 to{opacity:1;transform:translateY(0)}
 }
 
-
-.modal{animation:scaleIn .3s ease forwards}
 @keyframes scaleIn {
 from{opacity:0;transform:scale(0.95)}
 to{opacity:1;transform:scale(1)}
+}
+
+.modal {
+  animation:scaleIn .3s ease forwards;
 }
