@@ -1,14 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Loja Chic</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/media-query.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="container" role="banner">
@@ -23,13 +20,13 @@
     <nav class="main-nav" role="navigation" aria-label="Navegação principal">
       <a href="#">Início</a>
       <a href="#produtos">Produtos</a>
+      <a href="#novidades">Novidades</a>
       <a href="#sobre">Sobre</a>
-      <a href="#contato">Contatos</a>
     </nav>
 
     <div class="actions">
       <button class="btn secondary">Entrar</button>
-      <button class="btn">Carrinho</button>
+      <button class="btn" id="openCart">Carrinho <span id="cartCount">0</span></button>
     </div>
 
     <button class="hamburger" id="hamburger" aria-expanded="false" aria-label="Abrir menu">
@@ -41,12 +38,8 @@
         <button class="mobile-close" id="mobileClose" aria-label="Fechar menu">✕</button>
         <a href="#" role="menuitem">Início</a>
         <a href="#produtos" role="menuitem">Produtos</a>
+        <a href="#novidades" role="menuitem">Novidades</a>
         <a href="#sobre" role="menuitem">Sobre</a>
-        <a href="#contato" role="menuitem">Contatos</a>
-        <div style="margin-top:18px">
-          <button class="btn secondary" style="width:100%;margin-bottom:8px">Entrar</button>
-          <button class="btn" style="width:100%">Carrinho</button>
-        </div>
       </div>
     </div>
   </header>
@@ -54,8 +47,8 @@
   <main class="container">
     <section class="hero">
       <div class="hero-left">
-        <h2>Moda & Beleza com toque contemporâneo</h2>
-        <p>Peças selecionadas e cosméticos veganos - entrega rápida, pagamento por Pix e atendimento via WhatsApp.</p>
+        <h2>Moda & Beleza — confiança e estilo</h2>
+        <p>Peças selecionadas e cosméticos com foco em qualidade. Atendimento via WhatsApp e pagamento por Pix.</p>
 
         <div class="search" role="search">
           <input type="search" id="searchInput" placeholder="Pesquisar por produto ou categoria..." />
@@ -70,15 +63,14 @@
         </div>
 
         <h3>Destaques</h3>
-        <div>
-          <div>Kit de cuidados - 4 passos</div>
-          <div>Vestido verão - novo tecido</div>
+        <div id="novidadesSection">
+          <div id="novidadesContainer" class="grid"></div>
         </div>
       </div>
 
       <aside class="hero-right">
         <div class="promo">
-          <img src="https://images.unsplash.com/photo-1542834369-f10ebf06d3cb?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Promo" />
+          <img src="https://images.unsplash.com/photo-1542834369-f10ebf06d3cb?q=80&w=800&auto=format&fit=crop" alt="Promo" />
         </div>
       </aside>
     </section>
@@ -90,7 +82,7 @@
 
     <section id="sobre">
       <h3>Sobre a loja</h3>
-      <p>Somos uma marca dedicada a oferecer moda consciente e cosméticos de alta qualidade. Atendimento personalizado via WhatsApp e pagamento por Pix. Trocas e devoluções em até 7 dias úteis.</p>
+      <p>Somos uma marca dedicada a oferecer moda consciente e cosméticos de alta qualidade. Trocas em até 7 dias úteis.</p>
     </section>
   </main>
 
@@ -113,6 +105,22 @@
   </div>
 
   <div id="modal"><div class="card-modal"><h3>Pagamento via Pix</h3><p>Gerando QR Code...</p></div></div>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="cart-modal">
+    <div class="cart-box">
+      <div class="cart-header">
+        <h3>Seu Carrinho</h3>
+        <button class="close" onclick="closeCart()">✕</button>
+      </div>
+      <div id="cartItems" class="cart-items"></div>
+      <div class="cart-footer">
+        <div id="cartTotal">Total: R$ 0,00</div>
+        <button class="btn secondary" onclick="clearCart()">Esvaziar</button>
+        <button class="btn" onclick="checkoutPix()">Finalizar</button>
+      </div>
+    </div>
+  </div>
 
   <script src="scripts/script.js"></script>
 </body>
