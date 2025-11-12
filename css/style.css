@@ -1,35 +1,39 @@
 /* ==============================
-   STYLE PRINCIPAL (MODERNO V2)
-   ============================== */
+STYLE PRINCIPAL (MODERNO V3)
+============================== */
+
 
 @charset "UTF-8";
 
+
 :root{
-  --bg:#0f1724;
-  --card:#0b1220;
-  --muted:#9aa4b2;
-  --accent:#ff7b7b;
-  --accent-2:#9b8cff;
-  --glass:rgba(255,255,255,0.06);
-  --radius:16px;
-  --max-width:1200px;
+--bg:#0f1724;
+--card:#0b1220;
+--muted:#9aa4b2;
+--accent:#ff7b7b;
+--accent-2:#9b8cff;
+--glass:rgba(255,255,255,0.06);
+--radius:16px;
+--max-width:1200px;
 }
+
 
 *{box-sizing:border-box;transition:all 0.25s ease}
 html,body{height:100%;scroll-behavior:smooth}
 body{
-  margin:0;padding:0;
-  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-  background:linear-gradient(180deg,#071226 0%,#0b1730 100%);
-  color:#e6eef8;
-  -webkit-font-smoothing:antialiased;
-  -moz-osx-font-smoothing:grayscale;
+margin:0;padding:0;
+font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+background:linear-gradient(180deg,#071226 0%,#0b1730 100%);
+color:#e6eef8;
+-webkit-font-smoothing:antialiased;
+-moz-osx-font-smoothing:grayscale;
 }
 .container{max-width:var(--max-width);margin:0 auto;padding:24px}
 
+
 /* ==============================
-   CABEÇALHO FIXO + HAMBÚRGUER
-   ============================== */
+CABEÇALHO FIXO + HAMBÚRGUER
+============================== */
 header{
 display:flex;align-items:center;justify-content:space-between;padding:18px 0;
 position:fixed;top:0;left:0;width:100%;z-index:50;
@@ -85,21 +89,3 @@ CATEGORIAS E PRODUTOS
 
 
 /* ==============================
-FOOTER
-============================== */
-footer{margin-top:36px;padding:28px;border-top:1px solid rgba(255,255,255,0.05);background:rgba(11,18,32,0.6);backdrop-filter:blur(6px)}
-.footer-grid{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
-.socials a{background:var(--glass);padding:10px;border-radius:10px;text-decoration:none;color:var(--muted);font-weight:700}
-.socials a:hover{background:var(--accent);color:white}
-
-
-.center{display:flex;align-items:center;justify-content:center}
-
-
-/* ==============================
-ANIMAÇÕES
-============================== */
-@keyframes fadeInUp{
-from{opacity:0;transform:translateY(20px)}
-to{opacity:1;transform:translateY(0)}
-}
