@@ -1,0 +1,14 @@
+/* ==============================
+RESPONSIVIDADE
+============================== */
+@media(max-width:980px){
+.hero{grid-template-columns:1fr}
+.grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+nav{display:none}
+.hamburger{display:flex}
+.grid{grid-template-columns:1fr}
+.hero-left h2{font-size:28px}
+.hero-right{display:none}
+}
