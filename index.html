@@ -1,183 +1,119 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="css/media-query.css">
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loja Chic</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/media-query.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-   <header class="container">
+  <header class="container" role="banner">
     <div class="brand">
-        <div class="logo">LC</div>
-        <div>
-            <h1>LOJA CHIC</h1>
-            <div class="footer-info">Roupas • Cosméticos</div>
-        </div>
+      <div class="logo">LC</div>
+      <div>
+        <h1>Loja Chic</h1>
+        <div class="footer-info">Roupas • Cosméticos</div>
+      </div>
     </div>
-    <nav>
-        <a href="#">Inicio</a>
-        <a href="#">Produtos</a>
-        <a href="#">Sobre</a>
-        <a href="#">Contatos</a>
+
+    <nav class="main-nav" role="navigation" aria-label="Navegação principal">
+      <a href="#">Início</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contatos</a>
     </nav>
+
     <div class="actions">
-        <button class="btn-secondary">Entrar</button>
-        <button class="btn">Carrinhos</button>
+      <button class="btn secondary">Entrar</button>
+      <button class="btn">Carrinho</button>
     </div>
-   </header>
 
-   <main class="container">
-        <section class="hero">
-            <div class="hero-left">
-                <h2>Moda & Beleza com toque contemporâneo</h2>
-                <p>Peças selecionadas e cosméticos veganos - entrega rápida, pagamento por Pix e atendimento via whatsApp.</p>
-                <div class="search" role="search">
-                    <input type="search" placeholder="Pesquisar Produtos, marcas e Coleções" />
-                    <button class="btn">Buscar</button>
-                </div>
+    <button class="hamburger" id="hamburger" aria-expanded="false" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
 
-                <div class="cats" aria-label="Categorias">
-                    <div class="cat">Novidades</div>
-                    <div class="cat">Roupas</div>
-                    <div class="cat">Cosméticos</div>
-                    <div class="cat">Promoções</div>
-                </div>
+    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+      <div class="mobile-nav-inner" role="menu">
+        <button class="mobile-close" id="mobileClose" aria-label="Fechar menu">✕</button>
+        <a href="#" role="menuitem">Início</a>
+        <a href="#produtos" role="menuitem">Produtos</a>
+        <a href="#sobre" role="menuitem">Sobre</a>
+        <a href="#contato" role="menuitem">Contatos</a>
+        <div style="margin-top:18px">
+          <button class="btn secondary" style="width:100%;margin-bottom:8px">Entrar</button>
+          <button class="btn" style="width:100%">Carrinho</button>
+        </div>
+      </div>
+    </div>
+  </header>
 
-                <h3>Destaques</h3>
-                <div>
-                    <div>Kit de cuidados - 4 passos</div>
-                    <div>Vestido verão - novo tecido</div>
-                </div>
-            </div>
+  <main class="container">
+    <section class="hero">
+      <div class="hero-left">
+        <h2>Moda & Beleza com toque contemporâneo</h2>
+        <p>Peças selecionadas e cosméticos veganos - entrega rápida, pagamento por Pix e atendimento via WhatsApp.</p>
 
-            <aside class="hero-right">
-                <div class="promo">
-                    <img src="https://images.unsplash.com/photo-1542834369-f10ebf06d3cb?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Promo" />
-                </div>
-            </aside>
-        </section>
+        <div class="search" role="search">
+          <input type="search" id="searchInput" placeholder="Pesquisar por produto ou categoria..." />
+          <button class="btn" id="btnBuscar">Buscar</button>
+        </div>
 
-        <section id="produtos">
-            <h3>Produtos em destaque</h3>
-            <div class="grid" aria-live="polite">
-                <!-- card 1 -->
-                 <article class="card">
-                    <img src="" alt="">
-                    <div class="meta">
-                        <div>
-                            <div>Batom Líquido Matte</div>
-                            <div class="tag">Cosmético • Lux</div>
-                        </div>
-                        <div class="price">R$ 49,99</div>
-                    </div>
-                    <div class="buy">
-                        <button class="btn" onclick="openWhatsapp('Gostaria de mais informações sobre Batom Líquido Matte')">WhatsApp</button>
-                        <button class="btn secondary" onclick="openPixModal('Batom Líquido Matte',49.9)">Pagar com Pix</button>
-                    </div>
-                 </article>
+        <div class="cats" id="filtros" aria-label="Categorias">
+          <div class="cat active" data-cat="Todos">Todos</div>
+          <div class="cat" data-cat="Roupas">Roupas</div>
+          <div class="cat" data-cat="Cosméticos">Cosméticos</div>
+          <div class="cat" data-cat="Promoções">Promoções</div>
+        </div>
 
-                 <!-- Card 2 -->
-                  <article class="card">
-                    <img src="" alt="">
-                    <div class="meta">
-                        <div>
-                            <div>Vestido Floral</div>
-                            <div class="tag">Roupas • Verão</div>
-                        </div>
-                        <div class="price">R$ 129,90</div>
-                    </div>
-                        <div class="buy">
-                            <button class="btn" onclick="openWhatsApp('Quero comprar o Vestido Floral')">WhatsApp</button>
-                            <button class="btn secondary" onclick="openPixModal('Vestido Floral',129.9)">Pagar com Pix</button>
-                        </div>
-                    </article>
-                
-                <!-- Card 3 -->
-                <article class="card">
-                    <img src="" alt="">
-                    <div class="meta">
-                        <div>
-                            <div>Creme Hidratante</div>
-                            <div class="tag">Cosmético • Natural</div>
-                        </div>
-                        <div class="price">R$ 69,90</div>
-                    </div>
-                    <div class="buy">
-                        <button class="btn" onclick="openWhatsApp('Quero o Creme Hidratante')">WhatsApp</button>
-                        <button class="btn secondary" onclick="openPixModal('Creme Hidratante',69.9)">Pagar com Pix</button>
-                    </div>
-                </article>
-
-                <!-- Card 4 -->
-                 <article class="card">
-                    <img src="" alt="">
-                    <div class="meta">
-                        <div>
-                            <div>Blusa Tricô</div>
-                            <div class="tag">Roupas • Outono</div>
-                        </div>
-                        <div class="price">R$ 89,90</div>
-                    </div>
-                    <div class="buy">
-                        <button class="btn" onclick="openWhatsApp('Tenho interesse na Blusa Tricô')">WhatsApp</button>
-                        <button class="btn secondary" onclick="openPixModal('Blusa Tricô',89.9)">Pagar com Pix</button>
-                    </div>
-                 </article>
-            </div>
-        </section>
-
-        <section id="sobre">
-            <h3>Sobre a loja</h3>
-            <p>Somos uma marca dedicada a oferecer moda consciente e cosméticos de alta qualidade. Atendimento personalizado via WhatsApp e pagamento por Pix. Trocas e devoluções em até 7 dias úteis.</p>
-        </section>
-   </main>
-
-   <footer class="container">
-    <div class="footer-grid">
+        <h3>Destaques</h3>
         <div>
-            <strong>Loja Chic</strong>
-            <div class="footer-info">CNPJ 00.000.000/000-00 • Atendimento: seg-sex 9h-18h</div>
+          <div>Kit de cuidados - 4 passos</div>
+          <div>Vestido verão - novo tecido</div>
         </div>
-        <div class="center">
-            <div class="socials">
-                <a href="#">IG</a>
-                <a href="#">FB</a>
-                <a href="#">TT</a>
-            </div>
-            <div class="center">
-                <div><span id="ano"></span> Loja Chic</div>
-            </div>
+      </div>
+
+      <aside class="hero-right">
+        <div class="promo">
+          <img src="https://images.unsplash.com/photo-1542834369-f10ebf06d3cb?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder" alt="Promo" />
         </div>
+      </aside>
+    </section>
+
+    <section id="produtos">
+      <h3>Produtos em destaque</h3>
+      <div id="produtosContainer" class="grid" aria-live="polite"></div>
+    </section>
+
+    <section id="sobre">
+      <h3>Sobre a loja</h3>
+      <p>Somos uma marca dedicada a oferecer moda consciente e cosméticos de alta qualidade. Atendimento personalizado via WhatsApp e pagamento por Pix. Trocas e devoluções em até 7 dias úteis.</p>
+    </section>
+  </main>
+
+  <footer class="container">
+    <div class="footer-grid">
+      <div>
+        <strong>Loja Chic</strong>
+        <div class="footer-info">CNPJ 00.000.000/0000-00 • Atendimento: seg-sex 9h-18h</div>
+      </div>
+      <div class="center">
+        <div class="socials"><a href="#">IG</a><a href="#">FB</a><a href="#">TT</a></div>
+      </div>
+      <div class="center"><div class="text-right">© <span id="ano"></span> Loja Chic</div></div>
     </div>
-   </footer>
+  </footer>
 
-   <!-- Quick actions (WhatsApp + PIX) -->
-    <div class="quick-actions">
-        <button class="qa-btn" title="WhatsApp" onclick="openWhatsApp('Olá! Tenho interesse nos produtos')">WA</button>
-        <button class="qa-btn" title="Pagar com Pix" onclick="openPixModal('Pagamento via Pix',0)">PIX</button>
-    </div>
+  <div class="quick-actions">
+    <button class="qa-btn" title="WhatsApp" onclick="openWhatsApp('Olá! Tenho interesse nos produtos')">WA</button>
+    <button class="qa-btn" title="Pagar com Pix" onclick="openPixModal('Pagamento via Pix',0)">PIX</button>
+  </div>
 
-    <!-- PIX modal -->
-     <div id="modal">
-        <div class="card-modal">
-            <div>
-                <h3>Pagamento via Pix</h3>
-                <button class="close" onclick="closeModal()">✕</button>
-            </div>
-            <p>Atenção: aqui você pode gerar um QR-code (integração futura). Para comfirmar a compra, envie o comprovante no WhatsApp.</p>
-            <div>QR-code (placeholder)</div>
-            <div>
-                <button class="btn secondary" onclick="closeModal()">Fechar</button>
-            </div>
-        </div>
-     </div>
+  <div id="modal"><div class="card-modal"><h3>Pagamento via Pix</h3><p>Gerando QR Code...</p></div></div>
 
-<script src="scripts/script.js"></script>  
-
+  <script src="scripts/script.js"></script>
 </body>
 </html>
