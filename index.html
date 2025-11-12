@@ -1,45 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Loja Chic</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/media-query.css">
 </head>
 <body>
-  <header class="container" role="banner">
-    <div class="brand">
-      <div class="logo">LC</div>
-      <div>
+  <header>
+    <div class="container">
+      <div class="brand">
+        <div class="logo">LC</div>
         <h1>Loja Chic</h1>
-        <div class="footer-info">Roupas • Cosméticos</div>
       </div>
-    </div>
-
-    <nav class="main-nav" role="navigation" aria-label="Navegação principal">
-      <a href="#">Início</a>
-      <a href="#produtos">Produtos</a>
-      <a href="#novidades">Novidades</a>
-      <a href="#sobre">Sobre</a>
-    </nav>
-
-    <div class="actions">
-      <button class="btn secondary">Entrar</button>
-      <button class="btn" id="openCart">Carrinho <span id="cartCount">0</span></button>
-    </div>
-
-    <button class="hamburger" id="hamburger" aria-expanded="false" aria-label="Abrir menu">
-      <span></span><span></span><span></span>
-    </button>
-
-    <div class="mobile-nav" id="mobileNav" aria-hidden="true">
-      <div class="mobile-nav-inner" role="menu">
-        <button class="mobile-close" id="mobileClose" aria-label="Fechar menu">✕</button>
-        <a href="#" role="menuitem">Início</a>
-        <a href="#produtos" role="menuitem">Produtos</a>
-        <a href="#novidades" role="menuitem">Novidades</a>
-        <a href="#sobre" role="menuitem">Sobre</a>
+      <nav>
+        <a href="#">Início</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <div class="actions">
+        <button class="btn">Entrar</button>
+      </div>
+      <div class="hamburger" id="hamburger">
+        <span></span><span></span><span></span>
       </div>
     </div>
   </header>
@@ -47,80 +32,53 @@
   <main class="container">
     <section class="hero">
       <div class="hero-left">
-        <h2>Moda & Beleza — confiança e estilo</h2>
-        <p>Peças selecionadas e cosméticos com foco em qualidade. Atendimento via WhatsApp e pagamento por Pix.</p>
-
-        <div class="search" role="search">
-          <input type="search" id="searchInput" placeholder="Pesquisar por produto ou categoria..." />
-          <button class="btn" id="btnBuscar">Buscar</button>
-        </div>
-
-        <div class="cats" id="filtros" aria-label="Categorias">
-          <div class="cat active" data-cat="Todos">Todos</div>
-          <div class="cat" data-cat="Roupas">Roupas</div>
-          <div class="cat" data-cat="Cosméticos">Cosméticos</div>
-          <div class="cat" data-cat="Promoções">Promoções</div>
-        </div>
-
-        <h3>Destaques</h3>
-        <div id="novidadesSection">
-          <div id="novidadesContainer" class="grid"></div>
-        </div>
+        <h2>Moda e Cosméticos com Estilo</h2>
+        <p>Encontre as últimas tendências de roupas e produtos de beleza na Loja Chic.</p>
+        <button class="btn">Ver Produtos</button>
       </div>
-
-      <aside class="hero-right">
-        <div class="promo">
-          <img src="https://images.unsplash.com/photo-1542834369-f10ebf06d3cb?q=80&w=800&auto=format&fit=crop" alt="Promo" />
-        </div>
-      </aside>
+      <div class="hero-right">
+        <img src="https://images.unsplash.com/photo-1542834369-f10ebf06d3cb?q=80&w=800&auto=format&fit=crop" alt="Loja Chic">
+      </div>
     </section>
 
     <section id="produtos">
-      <h3>Produtos em destaque</h3>
-      <div id="produtosContainer" class="grid" aria-live="polite"></div>
+      <h3>Produtos em Destaque</h3>
+      <div class="grid">
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800&auto=format&fit=crop" alt="Produto 1">
+          <div class="meta">
+            <span class="tag">Moda</span>
+            <span class="price">R$ 89,90</span>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?q=80&w=800&auto=format&fit=crop" alt="Produto 2">
+          <div class="meta">
+            <span class="tag">Beleza</span>
+            <span class="price">R$ 49,90</span>
+          </div>
+        </div>
+        <div class="card">
+          <img src="https://images.unsplash.com/photo-1536305030016-1a6e860b9fcd?q=80&w=800&auto=format&fit=crop" alt="Produto 3">
+          <div class="meta">
+            <span class="tag">Cuidados</span>
+            <span class="price">R$ 59,90</span>
+          </div>
+        </div>
+      </div>
     </section>
 
     <section id="sobre">
-      <h3>Sobre a loja</h3>
-      <p>Somos uma marca dedicada a oferecer moda consciente e cosméticos de alta qualidade. Trocas em até 7 dias úteis.</p>
+      <h3>Sobre Nós</h3>
+      <p>A Loja Chic nasceu com o propósito de oferecer produtos de moda e beleza que refletem elegância e autenticidade.</p>
     </section>
   </main>
 
-  <footer class="container">
-    <div class="footer-grid">
-      <div>
-        <strong>Loja Chic</strong>
-        <div class="footer-info">CNPJ 00.000.000/0000-00 • Atendimento: seg-sex 9h-18h</div>
-      </div>
-      <div class="center">
-        <div class="socials"><a href="#">IG</a><a href="#">FB</a><a href="#">TT</a></div>
-      </div>
-      <div class="center"><div class="text-right">© <span id="ano"></span> Loja Chic</div></div>
+  <footer>
+    <div class="container">
+      <p>© 2025 Loja Chic — Todos os direitos reservados.</p>
     </div>
   </footer>
-
-  <div class="quick-actions">
-    <button class="qa-btn" title="WhatsApp" onclick="openWhatsApp('Olá! Tenho interesse nos produtos')">WA</button>
-    <button class="qa-btn" title="Pagar com Pix" onclick="openPixModal('Pagamento via Pix',0)">PIX</button>
-  </div>
-
-  <div id="modal"><div class="card-modal"><h3>Pagamento via Pix</h3><p>Gerando QR Code...</p></div></div>
-
-  <!-- Cart Modal -->
-  <div id="cartModal" class="cart-modal">
-    <div class="cart-box">
-      <div class="cart-header">
-        <h3>Seu Carrinho</h3>
-        <button class="close" onclick="closeCart()">✕</button>
-      </div>
-      <div id="cartItems" class="cart-items"></div>
-      <div class="cart-footer">
-        <div id="cartTotal">Total: R$ 0,00</div>
-        <button class="btn secondary" onclick="clearCart()">Esvaziar</button>
-        <button class="btn" onclick="checkoutPix()">Finalizar</button>
-      </div>
-    </div>
-  </div>
 
   <script src="scripts/script.js"></script>
 </body>
