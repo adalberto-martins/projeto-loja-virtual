@@ -175,6 +175,7 @@ nav a:hover::after {
   font-family:'Playfair Display',serif;
   font-size:40px;
   margin:0 0 8px;
+  text-align: center;
   animation:fadeInUp .6s ease forwards;
 }
 
@@ -182,6 +183,7 @@ nav a:hover::after {
   color:var(--muted);
   margin:0 0 20px;
   line-height:1.5;
+  text-align: center;
   animation:fadeInUp .8s ease forwards;
 }
 
@@ -300,6 +302,7 @@ nav a:hover::after {
 color:var(--muted);
 max-width:70%;
 line-height:1.6;
+text-indent: 20px;
 }
 
 #sobre h3 {
