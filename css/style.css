@@ -1,91 +1,86 @@
 /* ==============================
-STYLE PRINCIPAL (MODERNO V3)
-============================== */
-
-
+   ESTILO PRINCIPAL - LOJA CHIC V6
+   ============================== */
 @charset "UTF-8";
 
-
 :root{
---bg:#0f1724;
---card:#0b1220;
---muted:#9aa4b2;
---accent:#ff7b7b;
---accent-2:#9b8cff;
---glass:rgba(255,255,255,0.06);
---radius:16px;
---max-width:1200px;
+  --bg:#0f1724;
+  --card:#0b1220;
+  --muted:#9aa4b2;
+  --accent:#ff7b7b;
+  --accent-2:#9b8cff;
+  --glass:rgba(255,255,255,0.06);
+  --radius:16px;
+  --max-width:1200px;
 }
-
 
 *{box-sizing:border-box;transition:all 0.25s ease}
 html,body{height:100%;scroll-behavior:smooth}
 body{
-margin:0;padding:0;
-font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
-background:linear-gradient(180deg,#071226 0%,#0b1730 100%);
-color:#e6eef8;
--webkit-font-smoothing:antialiased;
--moz-osx-font-smoothing:grayscale;
+  margin:0;padding:0;
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+  background:linear-gradient(180deg,#071226 0%,#0b1730 100%);
+  color:#e6eef8;
 }
+
 .container{max-width:var(--max-width);margin:0 auto;padding:24px}
 
-
-/* ==============================
-CABEÇALHO FIXO + HAMBÚRGUER
-============================== */
+/* HEADER */
 header{
-display:flex;align-items:center;justify-content:space-between;padding:18px 0;
-position:fixed;top:0;left:0;width:100%;z-index:50;
-background:rgba(11,18,32,0.7);backdrop-filter:blur(8px);
-box-shadow:0 2px 12px rgba(0,0,0,0.25);
+  display:flex;align-items:center;justify-content:space-between;padding:18px 0;
+  position:fixed;top:0;left:0;width:100%;z-index:50;
+  background:rgba(11,18,32,0.7);backdrop-filter:blur(8px);
+  box-shadow:0 2px 12px rgba(0,0,0,0.25);
+  transition:all 0.3s ease;
 }
-.brand{display:flex;gap:14px;align-items:center}
-.logo{width:52px;height:52px;background:linear-gradient(135deg,var(--accent),var(--accent-2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;font-family:'Playfair Display',serif;color:white}
-.brand h1{font-size:18px;margin:0}
-nav{display:flex;gap:14px;align-items:center}
-nav a{color:var(--muted);text-decoration:none;font-weight:600;position:relative}
-nav a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--accent);transition:width .3s ease}
-nav a:hover::after{width:100%}
-.actions{display:flex;gap:12px;align-items:center}
-.btn{background:var(--accent);border:none;padding:10px 14px;border-radius:12px;color:white;font-weight:700;cursor:pointer;box-shadow:0 4px 12px rgba(255,123,123,0.3)}
-.btn:hover{transform:translateY(-2px)}
+header.scrolled{
+  background:rgba(11,18,32,0.9);
+  backdrop-filter:blur(10px);
+  box-shadow:0 6px 20px rgba(0,0,0,0.35);
+  padding:10px 0;
+}
+header.scrolled .logo{transform:scale(0.9);transition:transform 0.3s ease}
+
+.logo{width:52px;height:52px;background:linear-gradient(135deg,var(--accent),var(--accent-2));border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-family:'Playfair Display',serif}
+
+/* BOTÕES */
+.btn{background:var(--accent);border:none;padding:10px 14px;border-radius:12px;color:white;font-weight:700;cursor:pointer}
 .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--muted)}
-.btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn:hover{transform:translateY(-2px)}
 
-
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
-.hamburger span{width:24px;height:3px;background:var(--muted);border-radius:2px}
-
-
-/* ==============================
-HERO E SEÇÕES
-============================== */
-.hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:120px 0 36px}
-.hero-left h2{font-family:'Playfair Display',serif;font-size:40px;margin:0 0 8px;animation:fadeInUp .6s ease forwards}
-.hero-left p{color:var(--muted);margin:0 0 20px;line-height:1.5;animation:fadeInUp .8s ease forwards}
-.search{display:flex;gap:8px;animation:fadeInUp 1s ease forwards}
-.search input{flex:1;padding:12px;border-radius:12px;border:0;background:var(--glass);color:inherit}
-.hero-right{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:18px;border-radius:16px;animation:fadeInUp 1.2s ease forwards}
-.promo img{width:100%;height:240px;object-fit:cover;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.3)}
-
-
-/* ==============================
-CATEGORIAS E PRODUTOS
-============================== */
-.cats{display:flex;gap:10px;margin:18px 0}
-.cat{background:var(--glass);padding:10px 12px;border-radius:12px;color:var(--muted);font-weight:600;cursor:pointer}
-.cat:hover{background:rgba(255,255,255,0.1);color:#fff}
-
-
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:22px 0}
-.card{background:linear-gradient(180deg,rgba(255,255,255,0.04),transparent);border-radius:14px;padding:12px;overflow:hidden;border:1px solid rgba(255,255,255,0.06);transform:translateY(0);transition:all .3s ease;animation:fadeInUp 1s ease forwards}
-.card:hover{transform:translateY(-6px);box-shadow:0 8px 24px rgba(0,0,0,0.25)}
+/* GRID DE PRODUTOS */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin:22px 0}
+.card{background:var(--glass);padding:12px;border-radius:14px;border:1px solid rgba(255,255,255,0.06)}
 .card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
 .card .meta{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
-.tag{font-size:12px;color:var(--muted)}
-.price{font-weight:700}
+.card .tag{font-size:12px;color:var(--muted)}
+.card .price{font-weight:700}
 .card .buy{margin-top:10px;display:flex;gap:8px}
 
+/* MODAL PIX */
+#modal{position:fixed;left:0;top:0;width:100%;height:100%;display:none;align-items:center;justify-content:center;background:rgba(2,6,23,0.6);z-index:80;backdrop-filter:blur(8px)}
+#modal.open{display:flex}
+.card-modal{background:#071026;padding:20px;border-radius:16px;max-width:420px;width:94%;box-shadow:0 8px 24px rgba(0,0,0,0.4)}
+.qr-container{text-align:center;margin:16px 0}
+.qr-container img{width:200px;height:200px;border-radius:12px;box-shadow:0 4px 12px rgba(0,0,0,0.3)}
+.pix-code{background:var(--glass);padding:10px;border-radius:8px;font-size:13px;color:var(--muted);word-wrap:break-word;text-align:center;user-select:all}
+.copy-btn{margin-top:10px;background:var(--accent);border:none;color:#fff;border-radius:10px;padding:8px 14px;cursor:pointer;font-weight:600}
+.copy-btn:hover{background:var(--accent-2)}
 
-/* ==============================
+/* FILTROS DE CATEGORIA */
+.cats {display:flex;flex-wrap:wrap;gap:10px;margin:20px 0}
+.cat{background:var(--glass);padding:10px 14px;border-radius:12px;cursor:pointer;color:var(--muted);font-weight:600;transition:background 0.3s ease,color 0.3s ease}
+.cat:hover{background:rgba(255,255,255,0.1);color:#fff}
+.cat.active{background:var(--accent);color:white;box-shadow:0 4px 10px rgba(255,123,123,0.3)}
+
+/* BUSCA */
+.search{display:flex;gap:8px;margin:16px 0}
+.search input{flex:1;padding:12px;border-radius:12px;border:0;background:var(--glass);color:inherit}
+.search input::placeholder{color:var(--muted)}
+.search .btn{padding:12px 18px}
+
+/* ANIMAÇÕES */
+.reveal{opacity:0;transform:translateY(30px);transition:all 0.6s ease-out}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.card:hover{transform:translateY(-6px) scale(1.02);box-shadow:0 8px 24px rgba(0,0,0,0.25)}
+
