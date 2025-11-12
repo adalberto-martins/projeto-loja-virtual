@@ -1,6 +1,24 @@
+/* ==============================
+RESPONSIVIDADE
+============================== */
+
+@media(max-width:520px) {
+   nav{display:none}
+  .hamburger{display:flex}
+  .grid{grid-template-columns:1fr}
+  .hero-left h2{font-size:28px}
+  .hero-right{display:none}
+}
+
 @media (max-width: 768px) {
-  nav { display: none; }
+   nav { display: none; }
   .hamburger { display: flex; }
   .hero { grid-template-columns: 1fr; text-align: center; }
   .hero-right img { margin-top: 20px; }
 }
+
+@media(max-width:980px) {
+  .hero{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+
