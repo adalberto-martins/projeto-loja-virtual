@@ -106,3 +106,69 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 });
 
+// === Carrinho de Compras (localStorage) ===
+document.addEventListener("DOMContentLoaded", () => {
+  const openCart = document.getElementById("openCart");
+  const closeCart = document.getElementById("closeCart");
+  const clearCart = document.getElementById("clearCart");
+  const cartModal = document.getElementById("cartModal");
+  const cartItemsContainer = document.getElementById("cartItems");
+  const cartTotal = document.getElementById("cartTotal");
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+
+  function renderCart() {
+    cartItemsContainer.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      const div = document.createElement("div");
+      div.classList.add("cart-item");
+      div.innerHTML = `
+        <span>${item.nome}</span>
+        <span>R$ ${item.preco.toFixed(2)}</span>
+        <button class="btn secondary remove-item" data-index="${index}">x</button>
+      `;
+      cartItemsContainer.appendChild(div);
+      total += item.preco;
+    });
+
+    cartTotal.textContent = `R$ ${total.toFixed(2)}`;
+    saveCart();
+  }
+
+  // Eventos principais
+  openCart.addEventListener("click", () => cartModal.classList.add("active"));
+  closeCart.addEventListener("click", () => cartModal.classList.remove("active"));
+  clearCart.addEventListener("click", () => {
+    cart = [];
+    renderCart();
+  });
+
+  document.addEventListener("click", e => {
+    if (e.target.classList.contains("remove-item")) {
+      const index = e.target.dataset.index;
+      cart.splice(index, 1);
+      renderCart();
+    }
+  });
+
+  // Simulação de botão "comprar" nos cards
+  document.querySelectorAll(".card .btn-buy").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const card = e.target.closest(".card");
+      const nome = card.querySelector("h4")?.textContent || "Produto";
+      const preco = parseFloat(card.querySelector(".price").textContent.replace("R$", "").replace(",", "."));
+      cart.push({ nome, preco });
+      renderCart();
+    });
+  });
+
+  renderCart(); // render inicial
+});
+
+
