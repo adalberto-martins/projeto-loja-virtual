@@ -112,6 +112,15 @@ nav a:hover::after {
   width:100%;
 }
 
+nav a.active {
+  color: var(--accent);
+}
+
+nav a.active::after {
+  width: 100%;
+  background: var(--accent);
+}
+
 .actions {
   display:flex;
   gap:12px;
@@ -164,65 +173,70 @@ nav a:hover::after {
 
 .mobile-nav {
   position: fixed;
-  top: 0;
-  right: 0;
+  inset: 0;
   height: 60vh;
   width: 90%;
   background: rgba(11,18,32,0.97);
   backdrop-filter: blur(6px);
-  box-shadow: -4px 0 20px rgba(0,0,0,0.4);
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.36s cubic-bezier(.2,.9,.2,.1), opacity 0.28s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 80px 20px;
-  transition: transform 0.4s ease;
-  transform: translateX(100%);
-  z-index: 100;
-  opacity: 0;
+  padding: 80px 20px;  
+  z-index: 9999;
+  will-change: transform, opacity;
+ 
 }
 .mobile-nav.open {
   transform: translateX(0);
   opacity: 1;
-  transition: transform 0.4s ease, opacity 0.3s ease;
+  pointer-events: auto;
 }
 .mobile-nav a {
   position: relative;
   color: #fff;
   text-decoration: none;
-  font-size: 18px;
-  font-weight: 600;
-  padding: 12px 0;
-  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  padding: 14px 0;
+  width: 100%;
   text-align: center;
-  transition: color 0.3s ease;
   -webkit-tap-highlight-color: transparent;
+  transition: color .22s ease;
 }
 
 .mobile-nav a::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 50%;
   bottom: 6px;
   width: 0;
-  height: 2px;
-  background: var(--destaque);
-  transition: all 0.3s ease;
+  height: 3px;
+  background: var(--accent);
+  transition: width .24s ease;
   transform: translateX(-50%);
 }
 
-.mobile-nav a:hover {
-  color: var(--destaque);
+.mobile-nav a:hover,
+.mobile-nav a:focus {
+  color: var(--accent);
 }
 
+
+
+.mobile-nav a:hover::after,
 .mobile-nav a:hover::after {
-  width: 40%;
+  width: 20%;
 }
 
 .mobile-nav .close {
   position: absolute;
-  top: 20px;
-  right: 20px;
+  top: 18px;
+  right: 18px;
   background: none;
   border: none;
   color: #fff;
@@ -380,6 +394,117 @@ text-indent: 20px;
 margin-bottom:10px;
 }
 
+/* ==============================
+   CONTATO COM MAPA E ROTA
+   ============================== */
+.contato {
+  padding: 80px 20px;
+  background: rgba(11,18,32,0.9);
+  border-top: 1px solid rgba(255,255,255,0.05);
+  color: #fff;
+  text-align: center;
+}
+
+.contato h3 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: var(--accent);
+}
+
+.contato-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contato-info {
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.contato-info a {
+  color: var(--accent);
+  text-decoration: none;
+}
+.contato-info a:hover {
+  text-decoration: underline;
+}
+
+.mapa-container {
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px rgba(0,0,0,0.4);
+  text-align: center; 
+}
+
+.mapa-container iframe {
+  border-radius: 12px;
+  display: block;
+}
+
+.rota-btn {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 12px 22px; /* aumentei o padding para equilibrar com o texto */
+  background: var(--accent);
+  color: #fff !important; /* força o texto branco visível */
+  border: none;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(255,123,123,0.25);
+  text-align: center;
+}
+
+.rota-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255,123,123,0.35);
+  background: linear-gradient(135deg, var(--accent), #ff9696);
+}
+
+.contato-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contato-form input,
+.contato-form textarea {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+}
+
+.contato-form textarea {
+  resize: none;
+  height: 120px;
+}
+
+.contato-form .btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.contato-form .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255,123,123,0.25);
+}
 
 /* ==============================
 RODAPÉ E INFORMAÇÕES
