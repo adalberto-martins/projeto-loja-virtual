@@ -8,11 +8,11 @@ const url = `https://wa.me/${phone}?text=${text}`;
 window.open(url,'_blank');
 }
 
-
 function openPixModal(title,amount){
 const modal = document.getElementById('modal');
 modal.classList.add('open');
 }
+
 function closeModal(){
 const modal = document.getElementById('modal');
 modal.classList.remove('open');
