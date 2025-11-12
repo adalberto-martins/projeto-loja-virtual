@@ -1,1 +1,6 @@
-@media(max-width:520px){nav{display:none}.hamburger{display:flex}}
+@media (max-width: 768px) {
+  nav { display: none; }
+  .hamburger { display: flex; }
+  .hero { grid-template-columns: 1fr; text-align: center; }
+  .hero-right img { margin-top: 20px; }
+}
