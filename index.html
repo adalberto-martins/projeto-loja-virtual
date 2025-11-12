@@ -16,7 +16,7 @@
         <div class="logo">LC</div>
         <div>
             <h1>LOJA CHIC</h1>
-            <div>Roupas Cosméticos</div>
+            <div class="footer-info">Roupas • Cosméticos</div>
         </div>
     </div>
     <nav>
@@ -64,9 +64,120 @@
 
         <section id="produtos">
             <h3>Produtos em destaque</h3>
+            <div class="grid" aria-live="polite">
+                <!-- card 1 -->
+                 <article class="card">
+                    <img src="" alt="">
+                    <div class="meta">
+                        <div>
+                            <div>Batom Líquido Matte</div>
+                            <div class="tag">Cosmético • Lux</div>
+                        </div>
+                        <div class="price">R$ 49,99</div>
+                    </div>
+                    <div class="buy">
+                        <button class="btn" onclick="openWhatsapp('Gostaria de mais informações sobre Batom Líquido Matte')">WhatsApp</button>
+                        <button class="btn secondary" onclick="openPixModal('Batom Líquido Matte',49.9)">Pagar com Pix</button>
+                    </div>
+                 </article>
 
+                 <!-- Card 2 -->
+                  <article class="card">
+                    <img src="" alt="">
+                    <div class="meta">
+                        <div>
+                            <div>Vestido Floral</div>
+                            <div class="tag">Roupas • Verão</div>
+                        </div>
+                        <div class="price">R$ 129,90</div>
+                    </div>
+                        <div class="buy">
+                            <button class="btn" onclick="openWhatsApp('Quero comprar o Vestido Floral')">WhatsApp</button>
+                            <button class="btn secondary" onclick="openPixModal('Vestido Floral',129.9)">Pagar com Pix</button>
+                        </div>
+                    </article>
+                
+                <!-- Card 3 -->
+                <article class="card">
+                    <img src="" alt="">
+                    <div class="meta">
+                        <div>
+                            <div>Creme Hidratante</div>
+                            <div class="tag">Cosmético • Natural</div>
+                        </div>
+                        <div class="price">R$ 69,90</div>
+                    </div>
+                    <div class="buy">
+                        <button class="btn" onclick="openWhatsApp('Quero o Creme Hidratante')">WhatsApp</button>
+                        <button class="btn secondary" onclick="openPixModal('Creme Hidratante',69.9)">Pagar com Pix</button>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                 <article class="card">
+                    <img src="" alt="">
+                    <div class="meta">
+                        <div>
+                            <div>Blusa Tricô</div>
+                            <div class="tag">Roupas • Outono</div>
+                        </div>
+                        <div class="price">R$ 89,90</div>
+                    </div>
+                    <div class="buy">
+                        <button class="btn" onclick="openWhatsApp('Tenho interesse na Blusa Tricô')">WhatsApp</button>
+                        <button class="btn secondary" onclick="openPixModal('Blusa Tricô',89.9)">Pagar com Pix</button>
+                    </div>
+                 </article>
+            </div>
+        </section>
+
+        <section id="sobre">
+            <h3>Sobre a loja</h3>
+            <p>Somos uma marca dedicada a oferecer moda consciente e cosméticos de alta qualidade. Atendimento personalizado via WhatsApp e pagamento por Pix. Trocas e devoluções em até 7 dias úteis.</p>
         </section>
    </main>
-<script src="scripts/script.js"></script>    
+
+   <footer class="container">
+    <div class="footer-grid">
+        <div>
+            <strong>Loja Chic</strong>
+            <div class="footer-info">CNPJ 00.000.000/000-00 • Atendimento: seg-sex 9h-18h</div>
+        </div>
+        <div class="center">
+            <div class="socials">
+                <a href="#">IG</a>
+                <a href="#">FB</a>
+                <a href="#">TT</a>
+            </div>
+            <div class="center">
+                <div><span id="ano"></span> Loja Chic</div>
+            </div>
+        </div>
+    </div>
+   </footer>
+
+   <!-- Quick actions (WhatsApp + PIX) -->
+    <div class="quick-actions">
+        <button class="qa-btn" title="WhatsApp" onclick="openWhatsApp('Olá! Tenho interesse nos produtos')">WA</button>
+        <button class="qa-btn" title="Pagar com Pix" onclick="openPixModal('Pagamento via Pix',0)">PIX</button>
+    </div>
+
+    <!-- PIX modal -->
+     <div id="modal">
+        <div class="card-modal">
+            <div>
+                <h3>Pagamento via Pix</h3>
+                <button class="close" onclick="closeModal()">✕</button>
+            </div>
+            <p>Atenção: aqui você pode gerar um QR-code (integração futura). Para comfirmar a compra, envie o comprovante no WhatsApp.</p>
+            <div>QR-code (placeholder)</div>
+            <div>
+                <button class="btn secondary" onclick="closeModal()">Fechar</button>
+            </div>
+        </div>
+     </div>
+
+<script src="scripts/script.js"></script>  
+
 </body>
 </html>
