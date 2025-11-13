@@ -182,3 +182,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById("pixModal");
+
+    // GARANTE que o botão X sempre fecha
+    const closeX = modal.querySelector(".close-pix");
+    closeX.onclick = () => modal.classList.remove("open");
+
+    // GARANTE que o botão FECHAR funciona
+    const closeBtn = document.getElementById("closePixMsg");
+    if (closeBtn) {
+        closeBtn.onclick = () => modal.classList.remove("open");
+    }
+
+    // Fechar ao clicar fora
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) modal.classList.remove("open");
+    });
+});
+
