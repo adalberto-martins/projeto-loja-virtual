@@ -1,20 +1,58 @@
+@charset "UTF-8";
+
+/* Typical Device Breakpoints
+------------------------------
+Pequenas telas: até 600px
+Celular: de 600px até 768px
+Tablet: 768px até 992px
+Desktop: 992px até 1200px
+Grandes telas: acima de 1200px
+*/
+
 /* ==============================
 RESPONSIVIDADE
 ============================== */
 
 @media(max-width:520px) {
-   nav{display:none}
-  .hamburger{display:flex}
-  .grid{grid-template-columns:1fr}
-  .hero-left h2{font-size:28px}
-  .hero-right{display:none}
+   nav {
+    display:none;
+  }
+
+  .hamburger {
+    display:flex;
+  }
+
+  .grid {
+    grid-template-columns:1fr;
+  }
+
+  .hero-left h2 {
+    font-size:28px;
+  }
+
+  .hero-right {
+    display:none;
+  }
 }
 
 @media (max-width: 768px) {
-   nav { display: none; }
-  .hamburger { display: flex; }
-  .hero { grid-template-columns: 1fr; text-align: center; }
-  .hero-right img { margin-top: 20px; }
+   nav {
+    display:none;
+  }
+
+  .hamburger {
+    display:flex;
+  }
+
+  .hero {
+    grid-template-columns:1fr;
+    text-align:center;
+  }
+
+  .hero-right img {
+    margin-top:20px;
+  }
+
   .contato-grid {
     grid-template-columns: 1fr;
   }
@@ -32,8 +70,13 @@ RESPONSIVIDADE
 }
 
 @media(max-width:980px) {
-  .hero{grid-template-columns:1fr}
-  .grid{grid-template-columns:repeat(2,1fr)}
+  .hero {
+    grid-template-columns:1fr;
+  }
+
+  .grid {
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
 
