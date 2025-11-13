@@ -226,12 +226,12 @@ function loadAdminProducts() {
         <h4>${p.nome}</h4>
         <div class="meta">
           <span class="tag">${p.categoria || ''}</span>
-          <span class="price">R$ ${Number(p.preco).toFixed(2)}</span>
+          <span class="price">R$ ${Number(p.preco).toFixed(2).replace('.',',')}</span>
         </div>
         <div class="buy">
           <button class="btn" onclick="openWhatsApp(${p.nome})">WhatsApp</button>
           <button class="btn btn-buy">Adicionar</button>
-          <button class="btn secondary" onclick="openPixFromButton('${p.nome},${Number(p.preco).toFixed(2).replace('.',',')}')">Pagar com Pix</button>
+          <button class="btn secondary" onclick="openPixFromButton('${p.nome},${Number(p.preco).toFixed(2)}')">Pagar com Pix</button>
         </div>
       `;
       grid.appendChild(card);
