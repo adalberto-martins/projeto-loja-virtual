@@ -161,6 +161,8 @@
               <div class="cart-actions">
                 <button id="clearCart" class="btn secondary">Esvaziar</button>
                 <button id="closeCart" class="btn secondary">Fechar</button>
+                <!-- Botão Pix -->
+                 <button id="checkoutPixBtn" class="btn">Finalizar com PIX</button>
               </div>
             </div>
           </div>
@@ -205,45 +207,71 @@
         </section>
       </main>
 
-   <footer class="container">
-    <div class="footer-grid">
-        <div>
-            <strong>Loja Chic</strong>
-            <div class="footer-info">CNPJ 00.000.000/000-00 • Atendimento: seg-sex 9h-18h</div>
-        </div>
-        <div class="center">
-            <div class="socials">
-                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                <a href="#"><i class="fa-brands fa-facebook"></i></a>
-                <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
-            </div>
-            <div class="center">
-                <div class="text-right"> <span id="ano"></span> &copy;Loja Chic</div>
-            </div>
-        </div>
-    </div>
-   </footer>
+      <!-- MODAL PIX -->
+      <div id="pixModal" class="pix-modal">
+        <div class="pix-card">
+          <button class="close-pix btn secondary" style="float:right">✕</button>
 
-   <!-- Quick actions (WhatsApp + PIX) -->
-    <div class="quick-actions">
-        <button class="qa-btn" title="WhatsApp" onclick="openWhatsApp('Olá! Tenho interesse nos produtos')"><i class="fa-brands fa-whatsapp"></i></button>
-        <button class="qa-btn" title="Pagar com Pix" onclick="openPixModal('Pagamento via Pix',0)"><i class="fa-brands fa-pix"></i></button>
-    </div>
+          <h3>Pagamento via Pix</h3>
+          <p style="color:var(--muted)">Escaneie o QR Code abaixo ou copie o código Pix.</p>
 
-    <!-- PIX modal -->
-     <div id="modal">
-        <div class="card-modal">
-            <div>
-                <h3>Pagamento via Pix</h3>
-                <button class="close" onclick="closeModal()">✕</button>
-            </div>
-            <p>Atenção: aqui você pode gerar um QR-code (integração futura). Para comfirmar a compra, envie o comprovante no WhatsApp.</p>
-            <div>QR-code (placeholder)</div>
-            <div>
-                <button class="btn secondary" onclick="closeModal()">Fechar</button>
-            </div>
+          <!-- QR CODE -->
+          <div class="qr">
+            <img id="pixQR" src="" alt="QR Code Pix" width="220" height="220">
+          </div>
+
+          <!-- Código PIX (copia e cola) -->
+          <div class="pix-code" id="pixCode"></div>
+
+          <!-- Botões -->
+          <div class="pix-actions">
+            <button class="btn copy-pix" id="copyPixBtn">Copiar PIX</button>
+          </div>
+
+          <!-- Informações de envio -->
+          <div id="pixInfo" class="pix-info">
+            <p>Após efetuar o pagamento, envie o comprovante.</p>
+
+            <a href="https://wa.me/5511999999999?text=Olá,+já+enviei+o+pagamento+via+PIX+para+meu+pedido!"
+              target="_blank"
+              class="btn"
+              id="btnComprovante">
+              Enviar Comprovante
+            </a>
+
+            <button class="btn secondary" id="closePixMsg">Fechar</button>
+          </div>
+
         </div>
-     </div>
+      </div>
+
+
+        <footer class="container">
+          <div class="footer-grid">
+              <div>
+                  <strong>Loja Chic</strong>
+                  <div class="footer-info">CNPJ 00.000.000/000-00 • Atendimento: seg-sex 9h-18h</div>
+              </div>
+              <div class="center">
+                  <div class="socials">
+                      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                      <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                  </div>
+                  <div class="center">
+                      <div class="text-right"> <span id="ano"></span> &copy;Loja Chic</div>
+                  </div>
+              </div>
+          </div>
+        </footer>
+
+        <!-- Quick actions (WhatsApp + PIX) -->
+          <div class="quick-actions">
+              <button class="qa-btn" title="WhatsApp" onclick="openWhatsApp('Olá! Tenho interesse nos produtos')"><i class="fa-brands fa-whatsapp"></i></button>
+              <button class="qa-btn" title="Pagar com Pix" onclick="openPixFromButton()"><i class="fa-brands fa-pix"></i></button>
+          </div>
+
+   
 <script src="scripts/script.js"></script>
 </body>
 </html>
