@@ -10,6 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/e2c5db69a2.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+
 </head>
 <body>
    <header class="container">
@@ -94,7 +97,7 @@
                     <div class="buy">
                         <button class="btn" onclick="openWhatsApp('Gostaria de mais informações sobre Batom Líquido Matte')">WhatsApp</button>
                         <button class="btn btn-buy">Adicionar</button>
-                        <button class="btn secondary" onclick="openPixModal('Batom Líquido Matte',49.9)">Pagar com Pix</button>
+                        <button class="btn secondary" onclick="openPixFromButton('Batom Líquido Matte',49.9)">Pagar com Pix</button>
                     </div>
                  </article>
 
@@ -111,7 +114,7 @@
                         <div class="buy">
                             <button class="btn" onclick="openWhatsApp('Quero comprar o Vestido Floral')">WhatsApp</button>
                             <button class="btn btn-buy">Adicionar</button>
-                            <button class="btn secondary" onclick="openPixModal('Vestido Floral',129.9)">Pagar com Pix</button>
+                            <button class="btn secondary" onclick="openPixFromButton('Vestido Floral',129.9)">Pagar com Pix</button>
                         </div>
                     </article>
                 
@@ -128,7 +131,7 @@
                     <div class="buy">
                         <button class="btn" onclick="openWhatsApp('Quero o Creme Hidratante')">WhatsApp</button>
                         <button class="btn btn-buy">Adicionar</button>
-                        <button class="btn secondary" onclick="openPixModal('Creme Hidratante',69.9)">Pagar com Pix</button>
+                        <button class="btn secondary" onclick="openPixFromButton('Creme Hidratante',69.9)">Pagar com Pix</button>
                     </div>
                 </article>
 
@@ -145,7 +148,7 @@
                     <div class="buy">
                         <button class="btn" onclick="openWhatsApp('Tenho interesse na Blusa Tricô')">WhatsApp</button>
                         <button class="btn btn-buy">Adicionar</button>
-                        <button class="btn secondary" onclick="openPixModal('Blusa Tricô',89.9)">Pagar com Pix</button>
+                        <button class="btn secondary" onclick="openPixFromButton('Blusa Tricô',89.9)">Pagar com Pix</button>
                     </div>
                  </article>
             </div>
