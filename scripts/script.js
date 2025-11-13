@@ -1,3 +1,26 @@
+fetch('/api/produtos.php')
+  .then(r => r.json())
+  .then(produtos => {
+    const grid = document.querySelector(".grid");
+    produtos.forEach(p => {
+      const card = document.createElement("div");
+      card.classList.add("card");
+      card.innerHTML = `
+        <img src="${p.imagem}" alt="${p.nome}">
+        <h4>${p.nome}</h4>
+        <div class="meta">
+          <span class="tag">${p.categoria}</span>
+          <span class="price">R$ ${p.preco.toFixed(2)}</span>
+        </div>
+        <button class="btn btn-buy">Adicionar</button>
+      `;
+      grid.appendChild(card);
+    });
+
+    // integrar ao carrinho
+    attachBuyButtons();
+  });
+
 /* -------------------------------
    CARRINHO DE COMPRAS
 ---------------------------------- */
