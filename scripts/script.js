@@ -8,14 +8,14 @@ const url = `https://wa.me/${phone}?text=${text}`;
 window.open(url,'_blank');
 }
 
-function openPixModal(title,amount){
-const modal = document.getElementById('modal');
-modal.classList.add('open');
-}
-
 function closeModal(){
 const modal = document.getElementById('modal');
 modal.classList.remove('open');
+}
+
+// Abrir PIX a partir do botão flutuante (sem carrinho)
+function openPixFromButton() {
+  openPixModalFromCart(0); 
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -170,5 +170,130 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderCart(); // render inicial
 });
+
+/* ===== PIX CHECKOUT (front-end) ===== */
+// Substitua estes dados pelos reais:
+const chavePix = 'SUA_CHAVE_PIX_AQUI';        // ex: 'seuemail@dominio.com' ou '+5511999999999'
+const nomeTitular = 'Seu Nome ou Razao Social';
+const nomeLoja = 'Loja Chic';
+
+// cria modal PIX dinamicamente (se ainda não existir)
+(function ensurePixModal(){
+  if(document.getElementById('pixModal')) return;
+  const div = document.createElement('div');
+  div.id = 'pixModal';
+  div.innerHTML = `
+    <div class="pix-card">
+      <button class="close-pix btn secondary" style="float:right">✕</button>
+      <h3>Pagamento via Pix</h3>
+      <p style="color:var(--muted)">Escaneie o QR ou copie o código Pix abaixo.</p>
+      <div class="qr"><img id="pixQR" src="" alt="QR Code Pix" width="220" height="220"></div>
+      <div class="pix-code" id="pixCode"></div>
+      <div class="pix-actions">
+        <button class="btn copy-pix" id="copyPixBtn">Copiar PIX</button>
+        <a id="pixCopyLink" class="btn secondary" href="#" target="_blank" style="display:none">Abrir no App</a>
+      </div>
+    </div>
+  `;
+  document.body.appendChild(div);
+
+  // fechar
+  div.querySelector('.close-pix').addEventListener('click', ()=>{ div.classList.remove('open'); });
+  div.addEventListener('click', (e)=>{ if(e.target === div) div.classList.remove('open'); });
+})();
+
+// converte total numérico para string no formato com duas casas e sem separador de milhar (usado no payload)
+// usamos vírgula para exibição, ponto no payload (dependendo do gerador)
+function formatMoneyBR(value){
+  return Number(value).toFixed(2).replace('.', ',');
+}
+
+// monta payload PIX (formato simplificado - para testes)
+// Obs: payload abaixo é ilustrativo — para produção usar biblioteca/validador de EMV/BRCode adequado
+function gerarPayloadPix(chave, nome, merchantCity, valor){
+  // valor: número com 2 casas (ex: 129.90)
+  // Montagem simples (pode não cobrir todos os campos de checksum EMV) — suficiente para leitura por apps populares
+  const v = Number(valor).toFixed(2).toString().replace('.', '');
+  if (totalValor <= 0) {
+  document.querySelector('.pix-info p').textContent = 
+      'Use o QR Code abaixo para fazer um pagamento direto via PIX.';
+} else {
+  document.querySelector('.pix-info p').textContent = 
+      'Após efetuar o pagamento, envie o comprovante.';
+}
+const payload = `00020126580014BR.GOV.BCB.PIX01${String(chave).length.toString().padStart(2,'0')}${chave}520400005303986540${String(Number(valor).toFixed(2)).replace('.','')}5802BR5925${nomeLoja}6009${merchantCity}6304ABCD`;
+  // Observação: se quiser um BRCode totalmente válido com CRC correto, use uma lib no backend ou generator JS completo.
+  return payload;
+}
+
+// Gera QR via Chart Google (rápido). Se quiser serviço próprio, troque a URL.
+function gerarQRURL(payload){
+  return `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(payload)}`;
+}
+
+// função principal: abre modal PIX com valor do carrinho
+function openPixModalFromCart(totalValor){
+  const modal = document.getElementById('pixModal');
+  const qrImg = document.getElementById('pixQR');
+  const codeEl = document.getElementById('pixCode');
+  const copyBtn = document.getElementById('copyPixBtn');
+  const pixLink = document.getElementById('pixCopyLink');
+
+  // gerar payload (placeholder/simple)
+  const payload = gerarPayloadPix(chavePix, nomeTitular, 'SAOPAULO', Number(totalValor).toFixed(2));
+  const qr = gerarQRURL(payload);
+
+  qrImg.src = qr;
+  codeEl.textContent = payload;
+
+  // cópia
+  copyBtn.onclick = () => {
+    navigator.clipboard.writeText(payload).then(()=> alert('Código Pix copiado para a área de transferência.'));
+  };
+
+  // link direto (abre Google Maps/Apps que suportem)
+  pixLink.href = `https://api.qrserver.com/v1/read-qr-code/?fileurl=${encodeURIComponent(qr)}`;
+  pixLink.style.display = 'inline-block';
+
+  modal.classList.add('open');
+}
+
+// ligar ao botão do modal do carrinho
+document.addEventListener('DOMContentLoaded', function(){
+  const checkoutPixBtn = document.getElementById('checkoutPixBtn');
+  const cartTotalEl = document.getElementById('cartTotal');
+
+  if(checkoutPixBtn){
+    checkoutPixBtn.addEventListener('click', () => {
+      // obter total do carrinho (suporte ao seu formato, tente buscar ID/cartTotal)
+      // se seu código armazena total em variável 'total', use-a; aqui pegamos do texto do elemento:
+      let totalText = cartTotalEl ? cartTotalEl.textContent : null;
+      let total = 0;
+      if(totalText){
+        // espera algo como "Total: R$ 129,90" ou "R$ 129,90"
+        total = parseFloat(totalText.replace(/[^\d,.-]/g,'').replace(',','.')) || 0;
+      } else {
+        // fallback: calcule a partir do array `cart` se existir
+        if(typeof cart !== 'undefined' && Array.isArray(cart)){
+          total = cart.reduce((s,it)=> s + (it.preco || 0) * (it.qtd || 1), 0);
+        }
+      }
+      if(total <= 0) { alert('Carrinho vazio.'); return; }
+      openPixModalFromCart(total);
+    });
+  }
+});
+
+// fechar mensagem do PIX
+document.getElementById('closePixMsg')?.addEventListener('click', () => {
+  document.getElementById('pixModal')?.classList.remove('open');
+});
+
+document.getElementById('closePixMsg').addEventListener('click', () => {
+  document.getElementById('pixModal').classList.remove('open');
+});
+
+
+
 
 
