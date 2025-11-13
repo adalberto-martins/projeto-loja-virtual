@@ -202,3 +202,59 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+// === Carregar produtos do painel (localStorage) e injetar na grid ===
+function loadAdminProducts() {
+  try {
+    const stored = JSON.parse(localStorage.getItem('produtos')) || [];
+    if (!stored.length) return;
+    const grid = document.querySelector('.grid');
+    if (!grid) return;
+    // For each product, create card element
+    stored.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${p.imagem || 'img/prod-placeholder.jpg'}" alt="${p.nome}">
+        <h4>${p.nome}</h4>
+        <div class="meta">
+          <span class="tag">${p.categoria || ''}</span>
+          <span class="price">R$ ${Number(p.preco).toFixed(2)}</span>
+        </div>
+        <button class="btn btn-buy">Adicionar</button>
+      `;
+      grid.appendChild(card);
+    });
+    // Re-attach buy button listeners
+    attachBuyButtons();
+  } catch (err) {
+    console.error('Erro ao carregar produtos do painel:', err);
+  }
+}
+
+// helper to attach buy listeners (used after dynamic injection)
+function attachBuyButtons(){
+  document.querySelectorAll('.card .btn-buy').forEach(btn => {
+    // avoid attaching multiple listeners
+    if (btn.dataset.bound === '1') return;
+    btn.addEventListener('click', e => {
+      const card = e.target.closest('.card');
+      const nome = card.querySelector('h4')?.textContent || 'Produto';
+      const precoText = card.querySelector('.price')?.textContent || 'R$ 0';
+      const preco = parseFloat(precoText.replace(/[^\d,.-]/g,'').replace(',','.')) || 0;
+      // use same cart logic as main script expects
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      cart.push({ nome, preco });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      // if cart modal exists, re-render by calling renderCart if present
+      if (typeof renderCart === 'function') renderCart();
+      // mark bound
+    });
+    btn.dataset.bound = '1';
+  });
+}
+
+// call loader on DOM ready
+document.addEventListener('DOMContentLoaded', () => {
+  loadAdminProducts();
+});
+
