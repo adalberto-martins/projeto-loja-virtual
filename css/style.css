@@ -395,7 +395,7 @@ margin-bottom:10px;
 }
 
 /* ==============================
-   CONTATO COM MAPA E ROTA
+      CONTATO COM MAPA E ROTA
    ============================== */
 .contato {
   padding: 80px 20px;
@@ -507,7 +507,7 @@ margin-bottom:10px;
 }
 
 /* ==============================
-RODAPÉ E INFORMAÇÕES
+      RODAPÉ E INFORMAÇÕES
 ============================== */
 footer {
   margin-top:36px;
@@ -666,3 +666,72 @@ to{opacity:1;transform:scale(1)}
   justify-content: space-between;
   margin-top: 20px;
 }
+
+/* ===== MODAL PIX ===== */
+#pix-modal {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all .25s ease;
+}
+
+#pix-modal.open {
+  display: flex;
+  opacity: 1;
+  transform: scale(1);
+}
+
+
+.pix-card {
+  background: linear-gradient(180deg,#071026,#08122a);
+  padding: 20px;
+  border-radius: 14px;
+  max-width: 420px;
+  width: 92%;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
+  color: #fff;
+}
+.pix-card .qr { margin: 14px 0; }
+.pix-card .pix-code {
+  background: rgba(255,255,255,0.03);
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--muted);
+  word-break: break-all;
+}
+.pix-card .pix-actions { display:flex;gap:10px;justify-content:center;margin-top:12px; }
+.btn.copy-pix { 
+  padding:8px 12px;
+  border-radius:10px;
+}
+
+.pix-info {
+  margin-top: 14px;
+  background: rgba(255,255,255,0.03);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.pix-info p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+#btnComprovante {
+  display: block;
+  margin: 0 auto 10px auto;
+  background: var(--accent);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+#closePixMsg {
+  width: 100%;
+  margin-top: 5px;
+}
+
+
