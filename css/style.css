@@ -690,7 +690,7 @@ to{opacity:1;transform:scale(1)}
   box-shadow: 0 12px 40px rgba(0,0,0,0.6);
   color: #fff;
 }
-.pix-card .qr { margin: 14px 0; }
+.pix-card .qr { margin: 0; }
 .pix-card .pix-code {
   background: rgba(255,255,255,0.03);
   padding: 10px;
@@ -699,7 +699,20 @@ to{opacity:1;transform:scale(1)}
   color: var(--muted);
   word-break: break-all;
 }
-.pix-card .pix-actions { display:flex;gap:10px;justify-content:center;margin-top:12px; }
+.pix-card .pix-actions {
+  display:flex;
+  gap:6px;
+  justify-content:center;
+  margin-top:4px;
+  height: 30%
+}
+
+.pix-card .pix-actions .btn {
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  transform: scale(0.9);
+}
+
 .btn.copy-pix { 
   padding:8px 12px;
   border-radius:10px;
