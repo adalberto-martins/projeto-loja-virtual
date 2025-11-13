@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel Administrativo</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.admin-container {max-width:1000px;margin:40px auto;padding:20px;background:rgba(255,255,255,0.05);border-radius:12px;}
+.admin-title {font-size:28px;margin-bottom:20px;}
+.admin-form {display:grid;gap:12px;margin-bottom:30px;}
+.admin-form input, .admin-form textarea {padding:10px;border-radius:8px;border:0;background:rgba(255,255,255,0.06);color:white;}
+.admin-table {width:100%;border-collapse:collapse;}
+.admin-table th, .admin-table td {padding:12px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.btn-danger {background:#ff4b4b;}
+</style>
+</head>
+<body>
+
+<div class="admin-container">
+  <h2 class="admin-title">Painel Administrativo</h2>
+
+  <form id="productForm" class="admin-form">
+    <input type="text" id="name" placeholder="Nome do produto" required>
+    <input type="text" id="category" placeholder="Categoria" required>
+    <input type="number" id="price" placeholder="Preço" required step="0.01">
+    <input type="text" id="image" placeholder="URL da imagem" required>
+    <textarea id="description" placeholder="Descrição" rows="3"></textarea>
+    <button class="btn" type="submit">Salvar Produto</button>
+  </form>
+
+  <table class="admin-table">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>Categoria</th>
+        <th>Preço</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody id="productList"></tbody>
+  </table>
+</div>
+
+<script src="scripts/admin.jsadmin admin"></script>
+</body>
+</html>
