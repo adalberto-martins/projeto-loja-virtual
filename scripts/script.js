@@ -77,59 +77,53 @@ const chavePix = "SUA_CHAVE_PIX_AQUI";
 const nomeTitular = "Seu Nome";
 const nomeLoja = "Loja Chic";
 
+
 // Criar modal PIX automaticamente caso não exista
-(function ensurePixModal(){
-  if (document.getElementById("pixModal")) return;
 
-  const div = document.createElement("div");
-  div.id = "pixModal";
-  div.classList.add("pix-modal");
 
-  div.innerHTML = `
-    <div class="pix-card">
-      <button class="close-pix btn secondary" onclick="document.getElementById('pixModal').classList.remove('open')">✕</button>
-      <h3>Pagamento via Pix</h3>
-      <p style="color:var(--muted)">Aguarde, gerando código Pix...</p>
 
-      <div class="qr">
-        <img id="pixQR" src="" alt="QR Code Pix" width="220" height="220">
-      </div>
-
-      <div class="pix-code" id="pixCode"></div>
-
-      <div class="pix-actions">
-        <button class="btn copy-pix" id="copyPixBtn">Copiar PIX</button>
-      </div>
-
-      <div id="pixInfo" class="pix-info">
-        <p>Após efetuar o pagamento, envie o comprovante.</p>
-        <a href="https://wa.me/5511999999999" target="_blank" class="btn" id="btnComprovante">Enviar Comprovante</a>
-        <button class="btn secondary" id="closePixMsg">Fechar</button>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(div);
-
-  div.addEventListener("click", (e) => {
-    if (e.target === div) div.classList.remove("open");
-  });
-
-  document.getElementById("closePixMsg").onclick = () => {
-    div.classList.remove("open");
-  };
-})();
 
 /* -------------------------------
    Funções auxiliares do PIX
 ---------------------------------- */
 
-function gerarPayloadPix(chave, nome, cidade, valor) {
-  return `00020126580014BR.GOV.BCB.PIX01${chave.length.toString().padStart(2,'0')}${chave}520400005303986540${valor.toFixed(2).replace('.','')}5802BR5925${nomeLoja}6009${cidade}6304ABCD`;
+function crc16(payload) {
+  let crc = 0xFFFF;
+  for (let i = 0; i < payload.length; i++) {
+    crc ^= payload.charCodeAt(i) << 8;
+    for (let j = 0; j < 8; j++) {
+      crc = (crc & 0x8000) ? (crc << 1) ^ 0x1021 : crc << 1;
+    }
+  }
+  return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, "0");
 }
 
-function gerarQRURL(payload) {
-  return `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(payload)}`;
+function gerarPayloadPix(chave, nome, cidade, valor) {
+  const valorFormatado = valor.toFixed(2);
+
+  const payload =
+    "000201" +
+    "010212" +
+    "26580014BR.GOV.BCB.PIX01" +
+    chave.length.toString().padStart(2, "0") +
+    chave +
+    "52040000" +
+    "5303986" +
+    "540" + valorFormatado.replace('.', '') +
+    "5802BR" +
+    "59" + nome.length.toString().padStart(2, "0") + nome +
+    "60" + cidade.length.toString().padStart(2, "0") + cidade +
+    "6304";
+
+  const crc = crc16(payload);
+  return payload + crc;
+}
+
+function gerarQRLocal(text, callback) {
+  const canvas = document.createElement("canvas");
+  QRCode.toCanvas(canvas, text, { width: 260 }, function () {
+    callback(canvas.toDataURL());
+  });
 }
 
 /* -------------------------------
@@ -146,11 +140,24 @@ function openPixModalFromCart(totalValor) {
     return;
   }
 
-  const payload = gerarPayloadPix(chavePix, nomeTitular, "SAOPAULO", totalValor);
-  const qr = gerarQRURL(payload);
+  function crc16(payload) {
+  let crc = 0xFFFF;
+  for (let i = 0; i < payload.length; i++) {
+    crc ^= payload.charCodeAt(i) << 8;
+    for (let j = 0; j < 8; j++) {
+      crc = (crc & 0x8000) ? (crc << 1) ^ 0x1021 : crc << 1;
+    }
+  }
+  return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, "0");
+}
 
-  qrImg.src = qr;
+
+  const payload = gerarPayloadPix(chavePix, nomeTitular, "SAOPAULO", totalValor);
   codeEl.textContent = payload;
+
+  gerarQRLocal(payload, (imgBase64) => {
+    qrImg.src = imgBase64;
+  });
 
   if (totalValor > 0) {
     infoText.textContent = "Após efetuar o pagamento do seu pedido, envie o comprovante.";
@@ -160,6 +167,7 @@ function openPixModalFromCart(totalValor) {
 
   modal.classList.add("open");
 }
+
 
 /* -------------------------------
    PIX: Botão flutuante
@@ -220,7 +228,11 @@ function loadAdminProducts() {
           <span class="tag">${p.categoria || ''}</span>
           <span class="price">R$ ${Number(p.preco).toFixed(2)}</span>
         </div>
-        <button class="btn btn-buy">Adicionar</button>
+        <div class="buy">
+          <button class="btn" onclick="openWhatsApp(${p.nome})">WhatsApp</button>
+          <button class="btn btn-buy">Adicionar</button>
+          <button class="btn secondary" onclick="openPixFromButton('${p.nome},${Number(p.preco).toFixed(2)}')">Pagar com Pix</button>
+        </div>
       `;
       grid.appendChild(card);
     });
