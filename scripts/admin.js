@@ -43,8 +43,11 @@ document.getElementById("productForm").addEventListener("submit", function(e){
     const preco = parseFloat(document.getElementById("price").value);
     const imagem = document.getElementById("image").value;
     const descricao = document.getElementById("description").value;
+    const novidade = document.getElementById("isNovidade").value === "sim";
+    const promocao = document.getElementById("isPromocao").value === "sim";
 
-    produtos.push({ nome, categoria, preco, imagem, descricao });
+
+    produtos.push({ nome, categoria, preco, imagem, descricao, novidade, promocao });
 
     localStorage.setItem("produtos", JSON.stringify(produtos));
     renderList();
