@@ -16,6 +16,12 @@ function openPixFromButton(nome = "", preco = 0) {
   openPixModalFromCart(Number(preco) || 0);
 }
 
+/* ==============================================================
+   ANO AUTOMÁTICO NO RODAPÉ
+============================================================== */
+document.getElementById("ano").textContent = new Date().getFullYear();
+
+
 
 
 /* -------------------------------
