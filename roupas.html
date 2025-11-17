@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+  <title>Roupas – Loja Chic</title>
+</head>
+<body>
+
+<header class="container">
+  <h2>Roupas</h2>
+  <a href="index.html" class="btn secondary">← Voltar</a>
+</header>
+
+<main class="container">
+  <h3>Produtos da categoria: Roupas</h3>
+  <div class="grid"></div>
+</main>
+
+<script src="scripts/script.js"></script>
+<script src="scripts/categorias.js"></script>
+<script>
+  loadCategoryProducts("roupa");
+</script>
+<div id="pixModal" class="pix-modal">
+  <div class="pix-box">
+    <button class="close-pix">✕</button>
+    <h3>Pagamento via Pix</h3>
+
+    <img id="pixQR" src="" width="200">
+
+    <pre id="pixCode"></pre>
+
+    <div class="pix-info">
+      <p></p>
+    </div>
+
+    <button id="closePixMsg" class="btn">Fechar</button>
+  </div>
+</div>
+
+
+</body>
+</html>
