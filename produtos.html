@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todos os Produtos • Loja Chic</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+
+<body>
+
+<header class="container">
+    <h2>Todos os Produtos</h2>
+    <a href="index.html" class="btn secondary">← Voltar</a>
+</header>
+
+<main class="container">
+
+    <h3>Lista completa de produtos</h3>
+    <p>Incluindo produtos fixos + produtos cadastrados no painel admin.</p>
+
+    <div class="grid" id="listaProdutos"></div>
+
+</main>
+
+
+<!-- ======================
+      MODAL PIX COMPLETO
+     ====================== --><!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Todos os Produtos • Loja Chic</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+
+<body>
+
+<header class="container">
+    <h2>Todos os Produtos</h2>
+    <a href="index.html" class="btn secondary">← Voltar</a>
+</header>
+
+<main class="container">
+
+    <h3>Lista completa de produtos</h3>
+    <p>Incluindo produtos fixos + produtos cadastrados no painel admin.</p>
+
+    <div class="grid" id="listaProdutos"></div>
+
+</main>
+
+
+<!-- ======================
+      MODAL PIX COMPLETO
+     ====================== -->
+<div id="pixModal" class="pix-modal">
+    <div class="pix-card">
+        <button class="close-pix btn secondary" style="float:right">✕</button>
+
+        <h3>Pagamento via Pix</h3>
+        <p style="color:var(--muted)">Escaneie o QR Code abaixo ou copie o código Pix.</p>
+
+        <div class="qr">
+            <img id="pixQR" src="" alt="QR Code Pix" width="220" height="220">
+        </div>
+
+        <div class="pix-code" id="pixCode"></div>
+
+        <div id="pixInfo" class="pix-info">
+            <p>Após efetuar o pagamento, envie o comprovante.</p>
+            <a href="https://wa.me/5511999999999?text=Olá,+já+enviei+o+pagamento+via+PIX!"
+               target="_blank"
+               class="btn"
+               id="btnComprovante">
+               Enviar Comprovante
+            </a>
+            <button class="btn secondary" id="closePixMsg">Fechar</button>
+        </div>
+
+    </div>
+</div>
+
+
+<script src="scripts/script.js"></script>
+
+<script>
+
+    /* =============================
+       PRODUTOS FIXOS (do index.html)
+       ============================= */
+    const produtosFixos = [
+        {
+            nome: "Batom Líquido Matte",
+            preco: 49.99,
+            categoria: "Cosmético • Lux",
+            imagem: "imagens/card-1.webp"
+        },
+        {
+            nome: "Vestido Floral",
+            preco: 129.90,
+            categoria: "Roupas • Verão",
+            imagem: "imagens/card-2.webp"
+        },
+        {
+            nome: "Creme Hidratante",
+            preco: 69.90,
+            categoria: "Cosmético • Natural",
+            imagem: "imagens/card-3.webp"
+        },
+        {
+            nome: "Blusa Tricô",
+            preco: 89.90,
+            categoria: "Roupas • Outono",
+            imagem: "imagens/card-4.webp"
+        }
+    ];
+
+
+    /* =============================
+       PRODUTOS DO ADMIN
+       ============================= */
+    const produtosAdmin = JSON.parse(localStorage.getItem("produtos")) || [];
+
+
+    /* =============================
+       MONTAR OS CARDS
+       ============================= */
+    function carregarTodosProdutos() {
+        const lista = document.getElementById("listaProdutos");
+        lista.innerHTML = "";
+
+        const todos = [...produtosFixos, ...produtosAdmin];
+
+        todos.forEach(p => {
+
+            const precoNum = Number(p.preco) || 0;
+            const safeNome = p.nome.replace(/'/g, "\\'");
+
+            const card = document.createElement("article");
+            card.classList.add("card");
+
+            card.innerHTML = `
+                <img src="${p.imagem}" alt="${safeNome}">
+                <div class="meta">
+                    <div>
+                        <h4>${safeNome}</h4>
+                        <div class="tag">${p.categoria}</div>
+                    </div>
+                    <div class="price">R$ ${precoNum.toFixed(2).replace('.', ',')}</div>
+                </div>
+
+                <div class="buy">
+                    <button class="btn"
+                        onclick="openWhatsApp('Tenho interesse em ${safeNome}')">WhatsApp</button>
+
+                    <button class="btn btn-buy">Adicionar</button>
+
+                    <button class="btn secondary"
+                        onclick="openPixFromButton('${safeNome}', ${precoNum})">
+                        Pagar com Pix
+                    </button>
+                </div>
+            `;
+
+            lista.appendChild(card);
+        });
+
+        attachBuyButtons();
+    }
+
+    carregarTodosProdutos();
+
+</script>
+
+</body>
+</html>
+
+<div id="pixModal" class="pix-modal">
+    <div class="pix
