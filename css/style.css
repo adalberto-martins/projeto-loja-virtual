@@ -314,13 +314,17 @@ nav a.active::after {
   margin:18px 0;
 }
 
+a {
+  text-decoration: none;
+}
+
 .cat {
   background:var(--glass);
   padding:10px 12px;
   border-radius:12px;
   color:var(--muted);
   font-weight:600;
-  cursor:pointer;
+  cursor:pointer;  
 }
 
 .cat:hover {
@@ -383,6 +387,59 @@ h4 {
   display:flex;
   gap:8px;
 }
+
+/* ===============================
+   ESTILO PADRÃO PARA <select>
+   =============================== */
+
+select#category {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #f8f8f8;
+  color: #333;
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  appearance: none; /* remove seta nativa */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+}
+
+/* Seta customizada */
+select#category:after {
+  content: "▼";
+  font-size: 12px;
+  color: #666;
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Hover */
+select#category:hover {
+  background: #f0f0f0;
+  border-color: #bbb;
+}
+
+/* Focus */
+select#category:focus {
+  border-color: #007bff;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+}
+
+/* Option interno */
+select#category option {
+  padding: 10px;
+  font-size: 15px;
+}
+
 
 
 /* ==============================
