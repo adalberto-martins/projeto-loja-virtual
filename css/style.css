@@ -649,6 +649,26 @@ button.qa-btn{
   margin: 13px 5px;
 }
 
+/* CREDITOS AMDigital */
+.creditos {
+  margin-top:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  font-size:0.85em;
+  color:rgba(46,46,56,0.7);
+}
+.creditos img {
+  height:28px;
+  width:auto;
+  opacity:0.95;
+  transition:opacity .25s;
+}
+.creditos a:hover img {
+  opacity:1;
+}
+
 /* ==============================
       ANIMAÇÕES E MODAL PIX
 ============================== */
