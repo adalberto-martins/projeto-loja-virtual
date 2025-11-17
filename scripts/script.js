@@ -16,12 +16,6 @@ function openPixFromButton(nome = "", preco = 0) {
   openPixModalFromCart(Number(preco) || 0);
 }
 
-/* ==============================================================
-   ANO AUTOMÁTICO NO RODAPÉ
-============================================================== */
-document.getElementById("ano").textContent = new Date().getFullYear();
-
-
 
 
 /* -------------------------------
@@ -273,6 +267,13 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.target === modal) modal.classList.remove("open");
   });
 });
+
+/* --------------------
+ ANO AUTOMÁTICO
+ ------------------- */
+ 
+document.getElementById("ano").textContent = new Date().getFullYear();
+
 
 
 
