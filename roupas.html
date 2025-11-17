@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/media-query.css">
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
 
   <title>Roupas – Loja Chic</title>
@@ -25,22 +26,42 @@
 <script>
   loadCategoryProducts("roupa");
 </script>
-<div id="pixModal" class="pix-modal">
-  <div class="pix-box">
-    <button class="close-pix">✕</button>
-    <h3>Pagamento via Pix</h3>
+<!-- MODAL PIX -->
+      <div id="pixModal" class="pix-modal">
+        <div class="pix-card">
+          <button class="close-pix btn secondary" style="float:right">✕</button>
 
-    <img id="pixQR" src="" width="200">
+          <h3>Pagamento via Pix</h3>
+          <p style="color:var(--muted)">Escaneie o QR Code abaixo ou copie o código Pix.</p>
 
-    <pre id="pixCode"></pre>
+          <!-- QR CODE -->
+          <div class="qr">
+            <img id="pixQR" src="" alt="QR Code Pix" width="220" height="220">
+          </div>
 
-    <div class="pix-info">
-      <p></p>
-    </div>
+          <!-- Código PIX (copia e cola) -->
+          <div class="pix-code" id="pixCode"></div>
 
-    <button id="closePixMsg" class="btn">Fechar</button>
-  </div>
-</div>
+          <!-- Botões -->
+          <div class="pix-actions">
+            <button class="btn copy-pix" id="copyPixBtn">Copiar PIX</button>
+          </div>
+
+          <!-- Informações de envio -->
+          <div id="pixInfo" class="pix-info">
+            <p>Após efetuar o pagamento, envie o comprovante.</p>
+
+            <a href="https://wa.me/5511999999999?text=Olá,+já+enviei+o+pagamento+via+PIX+para+meu+pedido!"
+              target="_blank"
+              class="btn"
+              id="btnComprovante">
+              Enviar Comprovante
+            </a>
+
+            <button class="btn secondary" id="closePixMsg">Fechar</button>
+          </div>
+
+        </div>
 
 
 </body>
