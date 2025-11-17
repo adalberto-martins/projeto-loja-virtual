@@ -16,7 +16,18 @@
 .btn-danger {background:#ff4b4b;}
 </style>
 </head>
-<body>
+<body><label>É novidade?</label>
+<select id="isNovidade">
+  <option value="nao">Não</option>
+  <option value="sim">Sim</option>
+</select>
+
+<label>Está em promoção?</label>
+<select id="isPromocao">
+  <option value="nao">Não</option>
+  <option value="sim">Sim</option>
+</select>
+
 
 <div class="admin-container">
   <h2 class="admin-title">Painel Administrativo</h2>
@@ -26,7 +37,9 @@
     <input type="date" name="criado_em">
 
     <input type="text" id="name" placeholder="Nome do produto" required>
-    <input type="text" id="category" placeholder="Categoria" required>
+    <select id="category" aria-placeholder="Categoria" required>
+      <option value="Roupas">Roupas</option>
+      <option value="Cosméticos">Cosméticos</option>    
     <input type="number" id="price" placeholder="Preço" required step="0.01">
     <input type="text" id="image" placeholder="URL da imagem" required>
     <textarea id="description" placeholder="Descrição" rows="3"></textarea>
