@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Categorias – Loja Chic</title>
+
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/media-query.css">
+
+<script src="https://kit.fontawesome.com/e2c5db69a2.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+<style>
+/* layout da página */
+.filtros-box {
+    margin: 25px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.select {
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: white;
+    cursor: pointer;
+}
+
+.prod-info-count {
+    text-align: center;
+    margin: 25px 0 10px 0;
+    font-size: 15px;
+    color: var(--muted);
+}
+
+.subcats {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.subcat-btn {
+    background: rgba(255,255,255,0.06);
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: var(--muted);
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.subcat-btn.active {
+    background: var(--accent);
+    color: white;
+}
+
+#loadMore {
+    display: block;
+    margin: 25px auto;
+    padding: 10px 16px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<header class="container">
+    <div class="brand">
+        <div class="logo">LC</div>
+        <div>
+            <h1>LOJA CHIC</h1>
+            <div class="footer-info">Roupas • Cosméticos</div>
+        </div>
+    </div>
+
+    <nav id="navMenu">
+        <a href="index.html">Início</a>
+        <a href="categorias.html" class="active">Categorias</a>
+        <a href="#contato">Contato</a>
+    </nav>
+
+    <div class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></div>
+
+    <div class="actions">
+        <button class="btn secondary">Entrar</button>
+        <a href="admin.html" class="profile-btn">👤</a>
+    </div>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="close" id="closeNav"><i class="fa-solid fa-rectangle-xmark"></i></button>
+        <a href="index.html">Início</a>
+        <a href="categorias.html">Categorias</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="hero" style="padding-top:140px">
+        <div class="hero-left">
+            <h2>Categorias</h2>
+            <p>Selecione uma categoria para visualizar os produtos relacionados.</p>
+
+            <div class="search">
+                <input id="buscarCategoria" type="search" placeholder="Buscar categoria...">
+            </div>
+
+            <div class="cats" id="listaCategorias" style="margin-top:25px"></div>
+        </div>
+    </section>
+
+    <!-- FILTROS AVANÇADOS -->
+    <div class="filtros-box" id="filtrosAvancados" style="display:none">
+        <select id="ordenar" class="select">
+            <option value="az">A → Z</option>
+            <option value="za">Z → A</option>
+            <option value="preco-asc">Preço: menor → maior</option>
+            <option value="preco-desc">Preço: maior → menor</option>
+            <option value="data-recente">Mais recentes</option>
+            <option value="data-antiga">Mais antigos</option>
+        </select>
+
+        <select id="subcategoriaSelect" class="select">
+            <option value="">Todas as subcategorias</option>
+        </select>
+    </div>
+
+    <!-- SUBCATEGORIAS EM BOTÕES -->
+    <div class="subcats" id="subcatsBox" style="display:none"></div>
+
+    <!-- CONTADOR -->
+    <div class="prod-info-count" id="countInfo"></div>
+
+    <section id="prodCat">
+        <div class="grid" id="gridCategorias"></div>
+    </section>
+
+    <button id="loadMore" class="btn secondary" style="display:none">Carregar mais</button>
+
+</main>
+
+<footer class="container">
+    <div class="footer-grid">
+        <div>
+            <strong>Loja Chic</strong>
+            <div class="footer-info">© <span id="ano"></span></div>
+        </div>
+
+        <div class="socials">
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="scripts/produtos.js"></script>
+<script src="scripts/script.js"></script>
+
+<script>
+// =====================
+// VARIÁVEIS GLOBAIS
+// =====================
+let categoriaSelecionada = "";
+let subcategoriaSelecionada = "";
+let produtosFiltrados = [];
+let pagina = 1;
+const ITENS_POR_PAGINA = 8;
+
+// =====================
+// CARREGAR CATEGORIAS
+// =====================
+function carregarCategorias() {
+    const categoriasEl = document.getElementById("listaCategorias");
+    const produtos = listarProdutos();
+
+    const categorias = [...new Set(produtos.map(p => p.categoria.trim()))];
+
+    categoriasEl.innerHTML = "";
+
+    categorias.forEach(cat => {
+        const div = document.createElement("div");
+        div.className = "cat";
+        div.textContent = cat;
+        div.onclick = () => selecionarCategoria(cat);
+        categoriasEl.appendChild(div);
+    });
+}
+
+// =====================
+// SELECIONAR CATEGORIA
+// =====================
+function selecionarCategoria(categoria) {
+    categoriaSelecionada = categoria;
+    document.getElementById("filtrosAvancados").style.display = "flex";
+    document.getElementById("subcatsBox").style.display = "flex";
+
+    pagina = 1;
+    aplicarFiltros();
+    gerarSubcategorias();
+}
+
+// =====================
+// SUBCATEGORIAS
+// =====================
+function gerarSubcategorias() {
+    const produtos = listarProdutos().filter(p => p.categoria === categoriaSelecionada);
+    const subcatsBox = document.getElementById("subcatsBox");
+    const subSel = document.getElementById("subcategoriaSelect");
+
+    const subs = [...new Set(produtos.map(p => p.descricao.split(" ")[0] || ""))];
+
+    subcatsBox.innerHTML = "";
+    subSel.innerHTML = `<option value="">Todas as subcategorias</option>`;
+
+    subs.forEach(s => {
+        if (!s) return;
+
+        subSel.innerHTML += `<option value="${s}">${s}</option>`;
+
+        const btn = document.createElement("div");
+        btn.className = "subcat-btn";
+        btn.textContent = s;
+        btn.onclick = () => {
+            document.querySelectorAll(".subcat-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+            subcategoriaSelecionada = s;
+            pagina = 1;
+            aplicarFiltros();
+        };
+        subcatsBox.appendChild(btn);
+    });
+}
+
+// =====================
+// FILTROS COMPLETOS
+// =====================
+function aplicarFiltros() {
+    let lista = listarProdutos().filter(p => p.categoria === categoriaSelecionada);
+
+    if (subcategoriaSelecionada) {
+        lista = lista.filter(p => p.descricao.startsWith(subcategoriaSelecionada));
+    }
+
+    const ordenar = document.getElementById("ordenar").value;
+
+    if (ordenar === "az") lista.sort((a,b)=>a.nome.localeCompare(b.nome));
+    if (ordenar === "za") lista.sort((a,b)=>b.nome.localeCompare(a.nome));
+    if (ordenar === "preco-asc") lista.sort((a,b)=>a.preco-b.preco);
+    if (ordenar === "preco-desc") lista.sort((a,b)=>b.preco-a.preco);
+    if (ordenar === "data-recente") lista.sort((a,b)=>new Date(b.criado_em)-new Date(a.criado_em));
+    if (ordenar === "data-antiga") lista.sort((a,b)=>new Date(a.criado_em)-new Date(b.criado_em));
+
+    produtosFiltrados = lista;
+
+    renderPagina();
+}
+
+// =====================
+// PAGINAÇÃO
+// =====================
+function renderPagina() {
+    const grid = document.getElementById("gridCategorias");
+    const btnLoad = document.getElementById("loadMore");
+
+    const inicio = 0;
+    const fim = pagina * ITENS_POR_PAGINA;
+    const mostrar = produtosFiltrados.slice(inicio, fim);
+
+    grid.innerHTML = "";
+    
+    mostrar.forEach(p => {
+        grid.insertAdjacentHTML("beforeend", gerarCardHTML(p));
+    });
+
+    attachBuyButtons();
+
+    document.getElementById("countInfo").textContent =
+        `Mostrando ${mostrar.length} de ${produtosFiltrados.length} produtos`;
+
+    btnLoad.style.display = mostrar.length < produtosFiltrados.length ? "block" : "none";
+}
+
+document.getElementById("loadMore").onclick = () => {
+    pagina++;
+    renderPagina();
+};
+
+// =====================
+// BUSCAR CATEGORIA
+// =====================
+document.getElementById("buscarCategoria").addEventListener("input", e => {
+    const termo = e.target.value.toLowerCase();
+    document.querySelectorAll("#listaCategorias .cat").forEach(cat => {
+        cat.style.display = cat.textContent.toLowerCase().includes(termo) ? "block" : "none";
+    });
+});
+
+// =====================
+// INICIAR
+// =====================
+document.addEventListener("DOMContentLoaded", () => {
+    carregarCategorias();
+    document.getElementById("ano").textContent = new Date().getFullYear();
+});
+</script>
+
+</body>
+</html>
