@@ -309,6 +309,7 @@ nav a.active::after {
 
 .cats {
   display:flex;
+  justify-content: center;
   gap:10px;
   margin:18px 0;
 }
@@ -355,6 +356,10 @@ nav a.active::after {
   height:220px;
   object-fit:cover;
   border-radius:10px;
+}
+
+h4 {
+  margin: 0;
 }
 
 .card .meta {
@@ -590,6 +595,7 @@ button.qa-btn{
 /* ==============================
       ANIMAÇÕES E MODAL PIX
 ============================== */
+
 @keyframes 
   fadeInUp {
     from {
@@ -623,6 +629,7 @@ button.qa-btn{
 /* ==============================
    CARRINHO MODAL
    ============================== */
+
 .cart-modal {
   display: none;
   position: fixed;
@@ -685,6 +692,7 @@ button.qa-btn{
 }
 
 /* ===== MODAL PIX ===== */
+
 #pixModal {
   position: fixed;
   inset: 0;
@@ -773,7 +781,10 @@ button.qa-btn{
   transform:scale(1);
 }
 
-/* profile icon button */
+/* ===================
+ profile icon button
+ ================== */
+
 .profile-btn{
   display:inline-flex;
   align-items:center;
@@ -793,4 +804,21 @@ button.qa-btn{
   background:rgba(255,255,255,0.04);
   color:var(--accent);
   transform:translateY(-2px);
+}
+
+/* =========================
+   NOVIDADES
+   ========================= */
+.novidades {
+  margin-top: 40px;
+}
+
+.novidades h2 {
+  font-size: 26px;
+  margin-bottom: 20px;
+  color: #fff;
+}
+
+#novidadesGrid .card {
+  border: 1px solid rgba(255,255,255,0.12);
 }
