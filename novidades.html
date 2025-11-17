@@ -3,108 +3,65 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Novidades – Loja Chic</title>
-
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/media-query.css">
-
-  <script src="https://kit.fontawesome.com/e2c5db69a2.js" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+  <title>Novidades – Loja Chic</title>
 </head>
 <body>
 
 <header class="container">
-  <div class="brand">
-      <div class="logo">LC</div>
-      <div>
-          <h1>LOJA CHIC</h1>
-          <div class="footer-info">Roupas • Cosméticos</div>
-      </div>
-  </div>
-
-  <nav id="navMenu">
-      <a href="index.html">Início</a>
-      <a href="produtos.html">Produtos</a>
-      <a href="novidades.html">Novidades</a>
-      <a href="promocoes.html">Promoções</a>
-  </nav>
-
-  <div class="hamburger" id="hamburger">
-    <i class="fa-solid fa-bars"></i>
-  </div>
-
-  <div class="actions">
-      <button id="openCart" class="btn secondary">🛒 Carrinho</button>
-      <a href="index.html" class="btn secondary">← Voltar</a>
-  </div>
-
-  <div class="mobile-nav" id="mobileNav">
-    <button class="close" id="closeNav"><i class="fa-solid fa-rectangle-xmark"></i></button>
-    <a href="index.html">Início</a>
-    <a href="produtos.html">Produtos</a>
-    <a href="novidades.html">Novidades</a>
-    <a href="promocoes.html">Promoções</a>
-  </div>
+  <h2>Novidades</h2>
+  <button id="openCart" class="btn secondary">🛒 Carrinho</button>
+  <a href="index.html" class="btn secondary">← Voltar</a>
 </header>
 
 <main class="container">
-  <h2>Novidades</h2>
+  <h3>Produtos Recém-Adicionados</h3>
   <div class="grid"></div>
 </main>
 
-<!-- CARRINHO -->
-<div id="cartModal" class="cart-modal">
-  <div class="cart-content">
-    <h3>🛍️ Seu Carrinho</h3>
-    <div id="cartItems"></div>
-    <div class="cart-total">
-      <p>Total: <span id="cartTotal">R$ 0,00</span></p>
-      <div class="cart-actions">
-        <button id="clearCart" class="btn secondary">Esvaziar</button>
-        <button id="closeCart" class="btn secondary">Fechar</button>
-        <button id="checkoutPixBtn" class="btn">Finalizar com PIX</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- MODAL PIX -->
-<div id="pixModal" class="pix-modal">
-  <div class="pix-card">
-    <button class="close-pix btn secondary" style="float:right">✕</button>
-    <h3>Pagamento via Pix</h3>
-    <p>Escaneie o QR Code ou copie o código PIX abaixo:</p>
-
-    <div class="qr">
-      <img id="pixQR" src="" width="220" height="220">
-    </div>
-
-    <div class="pix-code" id="pixCode"></div>
-
-    <div class="pix-actions">
-      <button class="btn copy-pix" id="copyPixBtn">Copiar PIX</button>
-    </div>
-
-    <div id="pixInfo" class="pix-info">
-      <p>Após o pagamento, envie o comprovante.</p>
-      <a href="https://wa.me/5511999999999" target="_blank" class="btn">Enviar Comprovante</a>
-      <button class="btn secondary" id="closePixMsg">Fechar</button>
-    </div>
-  </div>
-</div>
-
-<!-- QUICK ACTIONS -->
-<div class="quick-actions">
-    <button class="qa-btn" onclick="openWhatsApp()"><i class="fa-brands fa-whatsapp"></i></button>
-    <button class="qa-btn" onclick="openPixFromButton()"><i class="fa-brands fa-pix"></i></button>
-</div>
-
 <script src="scripts/script.js"></script>
 <script src="scripts/tipo.js"></script>
-
 <script>
   loadTipoProdutos("novidades");
 </script>
+<!-- MODAL PIX -->
+      <div id="pixModal" class="pix-modal">
+        <div class="pix-card">
+          <button class="close-pix btn secondary" style="float:right">✕</button>
+
+          <h3>Pagamento via Pix</h3>
+          <p style="color:var(--muted)">Escaneie o QR Code abaixo ou copie o código Pix.</p>
+
+          <!-- QR CODE -->
+          <div class="qr">
+            <img id="pixQR" src="" alt="QR Code Pix" width="220" height="220">
+          </div>
+
+          <!-- Código PIX (copia e cola) -->
+          <div class="pix-code" id="pixCode"></div>
+
+          <!-- Botões -->
+          <div class="pix-actions">
+            <button class="btn copy-pix" id="copyPixBtn">Copiar PIX</button>
+          </div>
+
+          <!-- Informações de envio -->
+          <div id="pixInfo" class="pix-info">
+            <p>Após efetuar o pagamento, envie o comprovante.</p>
+
+            <a href="https://wa.me/5511999999999?text=Olá,+já+enviei+o+pagamento+via+PIX+para+meu+pedido!"
+              target="_blank"
+              class="btn"
+              id="btnComprovante">
+              Enviar Comprovante
+            </a>
+
+            <button class="btn secondary" id="closePixMsg">Fechar</button>
+          </div>
+        </div>
 
 </body>
 </html>
